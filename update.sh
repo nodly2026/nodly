@@ -646,10 +646,10 @@ update_x-ui() {
         fi
     fi
     echo -e "Got x-ui latest version: ${tag_version}, beginning the installation..."
-    ${curl_bin} -fLRo ${xui_folder}-linux-$(arch).tar.gz https://github.com/nodly2026/nodly/releases/download/${tag_version}/x-ui-linux-$(arch).tar.gz 2>/dev/null
+    ${curl_bin} -fLRo ${xui_folder}-linux-$(arch).tar.gz https://github.com/nodly2026/nodly/releases/download/${tag_version}/nodly-linux-$(arch).tar.gz 2>/dev/null
     if [[ $? -ne 0 ]]; then
         echo -e "${yellow}Trying to fetch version with IPv4...${plain}"
-        ${curl_bin} -4fLRo ${xui_folder}-linux-$(arch).tar.gz https://github.com/nodly2026/nodly/releases/download/${tag_version}/x-ui-linux-$(arch).tar.gz 2>/dev/null
+        ${curl_bin} -4fLRo ${xui_folder}-linux-$(arch).tar.gz https://github.com/nodly2026/nodly/releases/download/${tag_version}/nodly-linux-$(arch).tar.gz 2>/dev/null
         if [[ $? -ne 0 ]]; then
             _fail "ERROR: Failed to download x-ui, please be sure that your server can access GitHub"
         fi
@@ -664,7 +664,7 @@ update_x-ui() {
                 echo -e "${green}Removing old service unit version...${plain}"
                 rm -f /etc/init.d/x-ui >/dev/null 2>&1
             else
-                rm x-ui-linux-$(arch).tar.gz -f >/dev/null 2>&1
+                rm nodly-linux-$(arch).tar.gz -f >/dev/null 2>&1
                 _fail "ERROR: x-ui service unit not installed."
             fi
         else
@@ -675,7 +675,7 @@ update_x-ui() {
                 rm ${xui_service}/x-ui.service -f >/dev/null 2>&1
                 systemctl daemon-reload >/dev/null 2>&1
             else
-                rm x-ui-linux-$(arch).tar.gz -f >/dev/null 2>&1
+                rm nodly-linux-$(arch).tar.gz -f >/dev/null 2>&1
                 _fail "ERROR: x-ui systemd unit not installed."
             fi
         fi
@@ -692,12 +692,12 @@ update_x-ui() {
         rm ${xui_folder}/bin/README.md -f >/dev/null 2>&1
         rm ${xui_folder}/bin/LICENSE -f >/dev/null 2>&1
     else
-        rm x-ui-linux-$(arch).tar.gz -f >/dev/null 2>&1
+        rm nodly-linux-$(arch).tar.gz -f >/dev/null 2>&1
         _fail "ERROR: x-ui not installed."
     fi
     
     echo -e "${green}Installing new x-ui version...${plain}"
-    tar zxvf x-ui-linux-$(arch).tar.gz >/dev/null 2>&1
+    tar zxvf nodly-linux-$(arch).tar.gz >/dev/null 2>&1
     rm x-ui-linux-$(arch).tar.gz -f >/dev/null 2>&1
     cd x-ui >/dev/null 2>&1
     chmod +x x-ui >/dev/null 2>&1
